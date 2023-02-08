@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>雪球结构 &mdash; otc manual beta 文档</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/translations.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="prev" title="Welcome to otc manual’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> otc manual
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">主要内容:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">雪球结构</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">雪球结构介绍</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">1. 发生敲出，合约提前终止</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">2. 未发生敲出，曾发生敲入，合约存续至到期</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">3. 未发生敲出，未发生敲入，合约存续至到期</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">雪球结构字段录入说明</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">otc manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">雪球结构</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/snowball.rst.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>雪球结构<a class="headerlink" href="#id1" title="此标题的永久链接"></a></h1>
+<section id="id2">
+<h2>雪球结构介绍<a class="headerlink" href="#id2" title="此标题的永久链接"></a></h2>
+<p>雪球主要有两大结构要素，分别为敲入与敲出。其中敲入一般为每日观察，敲出一般为按月观察。</p>
+<p>下面以向下敲入向上敲出的雪球合约为例，进行损益情形分析。损益情形分为三类，第一类为在任意敲出观察日发生敲出，合约提前终止；
+第二类为未发生敲出，但在存续期曾发生敲入，合约存续至到期；第三类为未发生敲出，也未曾发生敲入，合约存续至到期。</p>
+<section id="id3">
+<h3>1. 发生敲出，合约提前终止<a class="headerlink" href="#id3" title="此标题的永久链接"></a></h3>
+<p>若在任意敲出观察日， 挂钩标的价格 &gt; 敲出障碍价格，雪球发生敲出，合约提前终止，合约持有者获得相应存续期间的票息。</p>
+<a class="reference internal image-reference" href="_images/敲出赔付情况.png"><img alt="_images/%E6%95%B2%E5%87%BA%E8%B5%94%E4%BB%98%E6%83%85%E5%86%B5.png" class="align-center" src="_images/%E6%95%B2%E5%87%BA%E8%B5%94%E4%BB%98%E6%83%85%E5%86%B5.png" style="width: 500px;" /></a>
+<p>合约收益为</p>
+<div class="math notranslate nohighlight">
+\[\tau\times C\times N+E\times P\times N\]</div>
+<p>其中 <span class="math notranslate nohighlight">\(\tau\)</span> 为产品存续期间， <span class="math notranslate nohighlight">\(C\)</span> 为敲出票息率， <span class="math notranslate nohighlight">\(N\)</span> 为名义本金， <span class="math notranslate nohighlight">\(E\)</span> 为增强参与率， <span class="math notranslate nohighlight">\(P\)</span> 为挂钩标的的涨跌幅度， <span class="math notranslate nohighlight">\(P=(\frac{期末价格}{期初价格} - 1)\)</span></p>
+</section>
+<section id="id4">
+<h3>2. 未发生敲出，曾发生敲入，合约存续至到期<a class="headerlink" href="#id4" title="此标题的永久链接"></a></h3>
+<p>若在任意敲出观察日，雪球都未发生敲出事件，而在某一敲入观察日， 挂钩标的价格 &lt; 敲入障碍价格，雪球发生敲入。则当合约到期时，合约持有者可能面临亏损。
+亏损金额一般为下跌幅度。</p>
+<a class="reference internal image-reference" href="_images/敲入赔付情况.png"><img alt="_images/%E6%95%B2%E5%85%A5%E8%B5%94%E4%BB%98%E6%83%85%E5%86%B5.png" class="align-center" src="_images/%E6%95%B2%E5%85%A5%E8%B5%94%E4%BB%98%E6%83%85%E5%86%B5.png" style="width: 500px;" /></a>
+<p>如果合约存在部分保本条款或者敲入参与率非100%时，亏损金额不能简单按照下跌幅度计算，其计算公式如下所示。</p>
+<div class="math notranslate nohighlight">
+\[
+敲入到期损益率 =
+\left\{
+\begin{array}{
+  &#64;{}% no padding
+  l&#64;{\quad}% some padding
+  r&#64;{}% no padding
+  &gt;{{}}r&#64;{}% no padding
+  &gt;{{}}l&#64;{}% no padding
+}
+  -(1-R) &amp; P &lt; -\frac{1-R}{KI} \\
+  KI\times P  &amp; -\frac{1-R}{KI} &lt;= P &lt;= 0 \\
+  C &amp; P &gt; 0
+\end{array}
+\right.
+\]</div><p>其中， <span class="math notranslate nohighlight">\(R\)</span> 为保本比例， <span class="math notranslate nohighlight">\(P\)</span> 为挂钩标的的涨跌幅度， <span class="math notranslate nohighlight">\(P=(\frac{期末价格}{期初价格} - 1)\)</span> , <span class="math notranslate nohighlight">\(KI\)</span> 为敲入参与率, <span class="math notranslate nohighlight">\(C\)</span> 为敲出票息率。</p>
+<p>以保本比例为20%，敲入参与率为150%，敲出票息率为20%的曾经敲入过的雪球合约为例，它的到期损益情况如下图所示，</p>
+<a class="reference internal image-reference" href="_images/雪球已敲入到期损益.png"><img alt="_images/%E9%9B%AA%E7%90%83%E5%B7%B2%E6%95%B2%E5%85%A5%E5%88%B0%E6%9C%9F%E6%8D%9F%E7%9B%8A.png" class="align-center" src="_images/%E9%9B%AA%E7%90%83%E5%B7%B2%E6%95%B2%E5%85%A5%E5%88%B0%E6%9C%9F%E6%8D%9F%E7%9B%8A.png" style="width: 500px;" /></a>
+</section>
+<section id="id5">
+<h3>3. 未发生敲出，未发生敲入，合约存续至到期<a class="headerlink" href="#id5" title="此标题的永久链接"></a></h3>
+<p>若在任意敲出观察日，雪球都未发生敲出事件，在任一敲入观察日， 雪球都未发生敲入事件，则当合约到期时，合约持有者将获得整个存续期间的红利票息收益。红利票息一般和敲出票息一致，也可额外指定。</p>
+<a class="reference internal image-reference" href="_images/未敲入未敲出赔付情况.png"><img alt="_images/%E6%9C%AA%E6%95%B2%E5%85%A5%E6%9C%AA%E6%95%B2%E5%87%BA%E8%B5%94%E4%BB%98%E6%83%85%E5%86%B5.png" class="align-center" src="_images/%E6%9C%AA%E6%95%B2%E5%85%A5%E6%9C%AA%E6%95%B2%E5%87%BA%E8%B5%94%E4%BB%98%E6%83%85%E5%86%B5.png" style="width: 500px;" /></a>
+<p>以保本比例为20%，红利票息为20%，敲出票息为20%的未曾敲入过的雪球合约为例，它的到期损益情况如下图所示，</p>
+<a class="reference internal image-reference" href="_images/雪球未敲入到期损益.png"><img alt="_images/%E9%9B%AA%E7%90%83%E6%9C%AA%E6%95%B2%E5%85%A5%E5%88%B0%E6%9C%9F%E6%8D%9F%E7%9B%8A.png" class="align-center" src="_images/%E9%9B%AA%E7%90%83%E6%9C%AA%E6%95%B2%E5%85%A5%E5%88%B0%E6%9C%9F%E6%8D%9F%E7%9B%8A.png" style="width: 500px;" /></a>
+</section>
+</section>
+<section id="id6">
+<h2>雪球结构字段录入说明<a class="headerlink" href="#id6" title="此标题的永久链接"></a></h2>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>结构定义</p></th>
+<th class="head"><p>示例</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>雪球类型</p></td>
+<td><p>看涨</p></td>
+<td><p>分为看涨与看跌两类,看涨雪球表示向上敲出向下敲入的雪球, 看跌雪球表示向下敲出向上敲入的雪球</p></td>
+</tr>
+<tr class="row-odd"><td><p>名义本金</p></td>
+<td><p>1000000</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>前端费率</p></td>
+<td><p>1%</p></td>
+<td><p>表示的是扣除的销售费用, 以实际收取的保证金进行计算, 即 <span class="math notranslate nohighlight">\(前端费用= 前端费率\times 名义本金\times 初始保证金比例\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>计息规则</p></td>
+<td></td>
+<td><p>可选值为Act365、Act360、Monthly、Weekly、不年化</p>
+<p>票息年化系数计算规则为</p>
+<ul class="simple">
+<li><p>ACT365 : <span class="math notranslate nohighlight">\(\frac{存续自然日}{365}\)</span></p></li>
+<li><p>ACT360: <span class="math notranslate nohighlight">\(\frac{存续自然日}{360}\)</span></p></li>
+<li><p>不年化: 1</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>敲出票息</p></td>
+<td><p>20%</p></td>
+<td><p>敲出时获得的 <span class="math notranslate nohighlight">\(票息收益 = 敲出票息 \times 年化系数\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>增强参与率</p></td>
+<td><p>0%</p></td>
+<td><p>指的是敲出时合约持有者在获得票息收益的基础上可以额外获得挂钩标的的部分涨幅收益</p>
+<p><span class="math notranslate nohighlight">\(增强收益率 = 增强参与率\times (\frac{敲出时价格}{期初价格} - 1)\)</span></p>
+</td>
+</tr>
+<tr class="row-even"><td><p>敲出观察设置</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>敲入障碍价格</p></td>
+<td><p>80%</p></td>
+<td><p>对于向下敲入雪球，在敲入观察日，挂钩资产价格小于敲入障碍价格，发生敲入事件。</p></td>
+</tr>
+<tr class="row-even"><td><p>敲入障碍类型</p></td>
+<td><p>欧式</p></td>
+<td><p>分为欧式与美式两类，欧式表示每日进行敲入观察，美式表示只在期末到期日进行敲入观察。</p></td>
+</tr>
+<tr class="row-odd"><td><p>敲入执行价格</p></td>
+<td><p>100%</p></td>
+<td><p>对于发生敲入但未发生敲出的雪球合约，到期损益一般通过敲入执行价格与期末价格的差值进行计算。</p></td>
+</tr>
+<tr class="row-even"><td><p>敲入参与率</p></td>
+<td><p>100%</p></td>
+<td><p>用于衡量敲入给合约持有者带来的亏损幅度</p>
+<p><span class="math notranslate nohighlight">\(敲入收益率 = 敲入参与率\times (\frac{期末价格}{敲入执行价格} - 1)\)</span></p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>保本比例</p></td>
+<td><p>80%</p></td>
+<td><p>亏损上限为 <strong>1-保本比例</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>初始保证金比例</p></td>
+<td><p>20%</p></td>
+<td><p>指的是合约持有者期初需缴纳的保证金金额</p></td>
+</tr>
+<tr class="row-odd"><td><p>是否追保</p></td>
+<td><p>否</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>红利票息</p></td>
+<td><p>20%</p></td>
+<td><p>指的是未敲入未敲出时的票息率，一般和敲出票息一致，也可额外指定。</p></td>
+</tr>
+<tr class="row-odd"><td><p>保证金利息</p></td>
+<td><p>0.05%</p></td>
+<td><p>保证金利息指的是当雪球产品结束时,合约持有者除了合约本身盈亏之外,可以获得的保证金部分产生的利息。在合约结束时(敲出或到期),支付给合约持有者。</p>
+<p><span class="math notranslate nohighlight">\(保证金返还总金额 = 保证金金额 + 保证金利息\)</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to otc manual’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2022, Qiuchen Han.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
